@@ -2757,6 +2757,9 @@ importers:
       '@deepseek-ai/dsh-client-ui-approval':
         specifier: workspace:*
         version: link:../../client/ui-approval
+      '@deepseek-ai/dsh-client-ui-arabic-support':
+        specifier: workspace:*
+        version: link:../../client/ui-arabic-support
       '@deepseek-ai/dsh-client-ui-attachment':
         specifier: workspace:*
         version: link:../../client/ui-attachment
@@ -3508,6 +3511,12 @@ importers:
       react:
         specifier: ^18.2.0
         version: 18.3.1
+
+  packages/client/ui-arabic-support:
+    devDependencies:
+      '@deepseek-ai/cordis':
+        specifier: workspace:~
+        version: link:../../../vendor/cordis
 
   packages/client/ui-attachment:
     devDependencies:

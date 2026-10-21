@@ -1,0 +1,77 @@
+name: Sync upstream
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * 0'
+
+permissions:
+  actions: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check for an open upstream update
+        id: pending
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          count="$(gh pr list --base master --state open --json headRefName --jq '[.[] | select(.headRefName | startswith("sync-upstream-"))] | length')"
+          if [ "$count" -gt 0 ]; then
+            echo 'An upstream update pull request is already open.'
+            echo 'exists=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Merge the official master into a review branch
+        if: steps.pending.outputs.exists != 'true'
+        id: merge
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git remote add upstream https://github.com/deepseek-ai/deepseek-harness.git
+          git fetch upstream master
+          branch="sync-upstream-$(git rev-parse --short=12 upstream/master)"
+          git switch -c "$branch"
+          if git merge --no-edit upstream/master; then
+            if git diff --quiet "${{ github.sha }}" HEAD; then
+              echo 'changed=false' >> "$GITHUB_OUTPUT"
+            else
+              echo 'changed=true' >> "$GITHUB_OUTPUT"
+              echo "branch=$branch" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo 'Upstream merge has conflicts; review the failed workflow run.' >&2
+            exit 1
+          fi
+      - name: Push the update branch
+        if: steps.merge.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh auth setup-git
+          git push origin "${{ steps.merge.outputs.branch }}"
+      - name: Open an update pull request
+        if: steps.merge.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="${{ steps.merge.outputs.branch }}"
+          if gh pr list --base master --head "$branch" --state open --json number --jq 'length' | grep -qx '1'; then
+            exit 0
+          fi
+          gh pr create --base master --head "$branch" \
+            --title "Sync official upstream $(git rev-parse --short=12 upstream/master)" \
+            --body 'Clean merge of the official master. Review the Arabic support package and Web checks before merging.'
+      - name: Run checks on the update branch
+        if: steps.merge.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run arabic-support-ci.yml --ref "${{ steps.merge.outputs.branch }}"

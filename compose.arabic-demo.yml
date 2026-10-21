@@ -1,0 +1,20 @@
+services:
+  dsh-arabic-demo:
+    build:
+      context: .
+      dockerfile: docker/arabic-demo.Dockerfile
+      args:
+        DSH_CLIENT_COMMIT_HASH: ${DSH_CLIENT_COMMIT_HASH:-}
+    image: dsh-arabic-demo:local
+    ports:
+      - "127.0.0.1:49251:3080"
+    environment:
+      DSH_HOME: /data
+      DSH_TELEMETRY_DISABLED: "1"
+      DSH_DEMO_PUBLIC_URL: http://127.0.0.1:49251/
+      DSH_DEMO_TRUSTED_HOST: 127.0.0.1
+    volumes:
+      - dsh-arabic-demo-data:/data
+
+volumes:
+  dsh-arabic-demo-data:

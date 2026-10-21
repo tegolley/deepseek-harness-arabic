@@ -336,6 +336,9 @@
     - id: ui-brand-official
       name: '@deepseek-ai/dsh-client-ui-brand-official'
 
+    - id: ui-arabic-support
+      name: '@deepseek-ai/dsh-client-ui-arabic-support'
+
     - id: ui-attachment
       name: '@deepseek-ai/dsh-client-ui-attachment'
 
