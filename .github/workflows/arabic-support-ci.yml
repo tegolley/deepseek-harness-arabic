@@ -1,0 +1,62 @@
+name: Arabic support checks
+
+on:
+  workflow_dispatch:
+    inputs:
+      full_web:
+        description: Run the complete Web replay suite
+        type: boolean
+        default: false
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  web-client:
+    runs-on: ubuntu-latest
+    env:
+      DSH_TELEMETRY_DISABLED: '1'
+      DSH_SNAPSHOT: replay
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '24'
+      - name: Enable pnpm
+        run: corepack enable
+      - name: Install
+        run: corepack pnpm install --frozen-lockfile
+      - name: Prepare file sandbox for Web replay tests
+        run: bash scripts/prepare-ci-bubblewrap.sh
+      - name: Arabic presentation tests
+        run: corepack pnpm exec vitest run packages/client/ui-arabic-support/tests
+      - name: Arabic-related client tests
+        run: >-
+          corepack pnpm exec vitest run
+          packages/client/ui-chat/tests
+          packages/client/ui-conversation/tests
+          packages/client/ui-renderer/tests
+          packages/client/ui-user-questions/tests
+          packages/client/ui-plan/tests
+          packages/client/ui-input-trigger/tests
+          --maxWorkers=2 --testTimeout=30000
+      - name: Install Chromium for Web replay tests
+        run: corepack pnpm --dir apps/web exec playwright install --with-deps chromium
+      - name: Assemble Web client
+        run: corepack pnpm run build
+      - name: Arabic-related Web replay tests
+        run: >-
+          corepack pnpm exec vitest run --config vitest.web.config.ts
+          apps/web/tests/chat-flow-layout.e2e.ts
+          apps/web/tests/math-rendering.e2e.ts
+          apps/web/tests/composer-focus.e2e.ts
+          apps/web/tests/composer-placeholder.e2e.ts
+          apps/web/tests/markdown-inline-code-links.e2e.ts
+          apps/web/tests/question-composer.e2e.ts
+          apps/web/tests/approval-composer.e2e.ts
+      - name: Complete Web replay suite
+        if: github.event_name == 'workflow_dispatch' && inputs.full_web
+        run: corepack pnpm run test:web:built
