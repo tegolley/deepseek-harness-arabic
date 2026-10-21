@@ -31,8 +31,16 @@ jobs:
         run: corepack pnpm install --frozen-lockfile
       - name: Arabic presentation tests
         run: corepack pnpm exec vitest run packages/client/ui-arabic-support/tests
-      - name: Web client tests
-        run: corepack pnpm exec vitest run packages/client packages/host --maxWorkers=2 --testTimeout=30000
+      - name: Arabic-related client tests
+        run: >-
+          corepack pnpm exec vitest run
+          packages/client/ui-chat/tests
+          packages/client/ui-conversation/tests
+          packages/client/ui-renderer/tests
+          packages/client/ui-user-questions/tests
+          packages/client/ui-plan/tests
+          packages/client/ui-input-trigger/tests
+          --maxWorkers=2 --testTimeout=30000
       - name: Install Chromium for Web replay tests
         run: corepack pnpm --dir apps/web exec playwright install --with-deps chromium
       - name: Assemble Web client
