@@ -2,7 +2,7 @@
 
 English | [中文](README.zh.md) | [العربية](README.ar.md)
 
-> **Arabic and RTL community fork:** [Read the Arabic overview and installation guide](README.ar.md).
+> **Arabic and RTL community fork:** [Read the Arabic overview and installation guide](README.ar.md). The npm command below installs the upstream release; use the source or Docker instructions for this fork's Arabic support.
 
 DeepSeek Harness (`dsh`) is an open-source agent harness developed by [DeepSeek AI](https://deepseek.com).
 
