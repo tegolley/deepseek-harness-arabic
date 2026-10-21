@@ -1,6 +1,8 @@
-# Arabic support fork
+# Arabic RTL support fork
 
 This fork starts from the official `deepseek-ai/deepseek-harness` repository. Arabic support lives in one isolated browser package, `packages/client/ui-arabic-support`. The only changes to upstream configuration are its Web roster row, Web bundle dependency, and TypeScript project reference. No private workspace files, credentials, or custom branding belong in this fork.
+
+The repository landing page is Arabic and RTL. `README.en.md` is the English guide. When upstream changes its own README, review those changes for both guides during the sync pull request. The screenshots use a local fixture and are not model output.
 
 ## Follow upstream
 

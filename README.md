@@ -1,79 +1,61 @@
-# DeepSeek Harness
+<p lang="en" dir="ltr" align="left">For the English guide, <a href="README.en.md">click here</a>. · <a href="README.zh.md">中文</a></p>
 
-English | [中文](README.zh.md) | [العربية](README.ar.md)
+<div lang="ar" dir="rtl" align="right">
 
-> **Arabic and RTL community fork:** [Read the Arabic overview and installation guide](README.ar.md). The npm command below installs the upstream release; use the source or Docker instructions for this fork's Arabic support.
+<h1>DeepSeek Harness RTL | دعم العربية</h1>
 
-DeepSeek Harness (`dsh`) is an open-source agent harness developed by [DeepSeek AI](https://deepseek.com).
+<p>نسخة مجتمعية مشتقة من <a href="https://github.com/deepseek-ai/deepseek-harness">المشروع الرسمي</a> تضيف اتجاه كتابة RTL للعربية داخل واجهة المحادثة. يشمل ذلك مربع الكتابة، ورسائل المستخدم والردود، والقوائم والأرقام المختلطة بكلمات إنجليزية. يظل النص الإنجليزي وحده باتجاه LTR.</p>
 
-It is built on an **everything-is-a-plugin** architecture and powered by [Cordis](https://github.com/cordiverse/cordis), whose design is described in [_A Programming Paradigm for Spatiotemporal Composability_](https://arxiv.org/abs/2608.25512).
+<h2>للمحترفين: تشغيل سريع</h2>
 
-Documentation: [https://deepseek-harness.github.io/deepseek-harness/](https://deepseek-harness.github.io/deepseek-harness/)
+<p>تحتاج إلى Git وDocker مع Compose. الأوامر التالية تبني نسخة هذه الصفحة من المصدر وتشغلها محلياً:</p>
 
-## Developer preview
+</div>
 
-DeepSeek Harness is in _developer preview_ and iterating rapidly. **THERE WILL BE COMPATIBILITY-BREAKING CHANGES.**
-
-Review the [safety notice](SAFETY.md) before running the project.
-
-## Run
-
-### Run from `npm`
-
-Install `Node.js`, then run:
-
-```sh
-npx @deepseek-ai/dsh web
+```bash
+git clone https://github.com/tegolley/deepseek-harness-rtl-arabic.git
+cd deepseek-harness-rtl-arabic
+bash docker/build-arabic-demo.sh
+docker compose -f compose.arabic-demo.yml up -d
+docker compose -f compose.arabic-demo.yml logs --tail=30 dsh-arabic-demo
 ```
 
-The command starts the Web UI at `http://127.0.0.1:3080` by default and opens it in the default browser for a local launch. An SSH launch only prints the host URL because the SSH client or editor owns the local forwarded address. Pass `--no-open` to run the server without opening a browser. See [Web UI guide](docs/user/guide/index.md).
+<div lang="ar" dir="rtl" align="right">
 
-### Run from source
+<p>افتح رابط <code>dsh web:</code> الظاهر في السجل على جهاز تشغيل Docker. الرابط يحمل رمز دخول، فلا تنشره. يقتصر الاتصال على <code>127.0.0.1:49251</code>. <a href="docs/arabic-support/INSTALL.ar.md#التثبيت-من-المصدر">تثبيت مباشر من المصدر</a> متاح أيضاً.</p>
 
-To run from a repository checkout:
+<h2>للمبتدئين: خطوة بخطوة</h2>
 
-```sh
-git clone https://github.com/deepseek-ai/deepseek-harness.git
-cd deepseek-harness
-pnpm install
-pnpm run build
-pnpm dsh web
-```
+<ol>
+<li>ثبّت Git وDocker Desktop أو Docker Engine مع Compose، ثم افتح نافذة الأوامر.</li>
+<li>انسخ الأوامر أعلاه بالترتيب. قد يستغرق البناء عدة دقائق ويحتاج مساحة إضافية؛ بلغت صورة التجربة نحو 5.5GB.</li>
+<li>انسخ رابط <code>dsh web:</code> من السجل وافتحه في متصفح الجهاز نفسه.</li>
+<li>يمكنك مشاهدة الواجهة من دون مفتاح نموذج. للحصول على رد فعلي، أضف إعداد النموذج من الواجهة ولا تضع المفتاح في GitHub.</li>
+<li>جرّب كتابة: <code>اكتب مثالاً بالعربية والإنجليزية عن Model X، مع السعر 123 ريال والإصدار Pro 2 والنسبة 45%.</code></li>
+</ol>
 
-`pnpm run build` prepares the repository artifacts. `pnpm dsh web` uses those built artifacts without rebuilding.
+<p>راجع <a href="docs/arabic-support/INSTALL.ar.md">دليل التثبيت العربي المفصل</a> إذا احتجت شرح كل خطوة أو تشغيل النسخة على جهاز بعيد.</p>
 
-## Community and support
+<h2>كيف يتغير اتجاه النص؟</h2>
 
-- Submit feedback or bug reports through [GitHub Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions).
-- Add the [`dsh-plugin`](https://github.com/topics/dsh-plugin) topic to your plugin repository for discoverability.
-- Join <a href="https://discord.gg/4MrtZUhpxg">DeepSeek Harness Discord community</a>.
+<p>تقرأ الإضافة كل كتلة نصية على حدة: الفقرة العربية تتجه من اليمين إلى اليسار مع عزل الأرقام والكلمات الإنجليزية داخلها؛ الفقرة الإنجليزية الخالصة تبقى من اليسار إلى اليمين. ينطبق ذلك على الردود ومربع الكتابة وبطاقات الأسئلة، من دون تغيير محتوى الرسائل أو إرسالها.</p>
 
-## Contributing
+<h2>صور قبل دعم RTL وبعده</h2>
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+<p>الصور تعرض الجلسة التجريبية نفسها داخل واجهة المشروع الرسمي ونسخة العربية. النص والرد محفوظان محلياً كبيانات عرض، ولم يُستدعَ نموذج أو يُستخدم مفتاح API. شاشة البدء قبل إعداد النموذج لا تتغير بتعديل اتجاه المحادثة.</p>
 
-## Development
+<h3>شاشة البدء قبل إعداد النموذج</h3>
 
-Start with the [development guide](docs/development.md) and [architecture documentation](docs/architecture.md).
+<table><thead><tr><th>قبل: المشروع الرسمي</th><th>بعد: نسخة RTL</th></tr></thead><tbody><tr><td><img src="docs/arabic-support/screenshots/before-start.png" alt="شاشة البدء في المشروع الرسمي" width="480"></td><td><img src="docs/arabic-support/screenshots/after-start.png" alt="شاشة البدء في نسخة دعم العربية" width="480"></td></tr></tbody></table>
 
-`pnpm run dev:web` builds, serves, and rebuilds client bundles on source edits in one terminal, and `make help` lists the matching Make targets for Web and Desktop; the guide's application commands section owns the full table.
+<h3>المحادثة بعد فتح الواجهة</h3>
 
-For agents, follow [AGENTS.md](AGENTS.md).
+<table><thead><tr><th>قبل: المشروع الرسمي</th><th>بعد: دعم العربية RTL</th></tr></thead><tbody><tr><td><img src="docs/arabic-support/screenshots/before-chat-ltr.png" alt="المحادثة المختلطة في المشروع الرسمي قبل دعم RTL" width="480"></td><td><img src="docs/arabic-support/screenshots/after-chat-rtl.png" alt="المحادثة المختلطة بعد دعم العربية RTL" width="480"></td></tr></tbody></table>
 
-## Citation
+<h2>التحديثات والملفات</h2>
 
-```bibtex
-@misc{deepseek-harness2026,
-  title={DeepSeek Harness: Everything is a Plugin},
-  author={DeepSeek-AI},
-  year={2026},
-  publisher={GitHub},
-  howpublished={\url{https://github.com/deepseek-ai/deepseek-harness}},
-}
-```
+<p>يفحص <code>Sync upstream</code> تحديثات المشروع الأصلي أسبوعياً ويفتح طلب دمج للمراجعة عند وجود تحديث. لا يدمج التغييرات تلقائياً. <a href="README.ar.md">تفاصيل دعم العربية</a> · <a href="docs/arabic-support/AGENT_INSTALL_PROMPT.md">تعليمات الوكيل بالإنجليزية</a> · <a href="SAFETY.md">إشعار السلامة</a> · <a href="LICENSE">ترخيص MIT</a>.</p>
 
-## License
+<p>أمر <code>npx @deepseek-ai/dsh web</code> يثبّت الإصدار الرسمي، ولا يتضمن تعديل العربية في هذه النسخة.</p>
 
-[MIT](LICENSE)
-
-Third-party dependencies and their licenses are disclosed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+</div>

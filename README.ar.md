@@ -1,4 +1,26 @@
-# دعم العربية في DeepSeek Harness
+<p lang="en" dir="ltr">For the English guide, <a href="README.en.md">click here</a>.</p>
+
+# DeepSeek Harness RTL: دعم العربية
+
+## للمحترفين
+
+من جذر هذه النسخة، شغّل العرض المعزول بعد تثبيت Git وDocker مع Compose:
+
+```bash
+bash docker/build-arabic-demo.sh
+docker compose -f compose.arabic-demo.yml up -d
+docker compose -f compose.arabic-demo.yml logs --tail=30 dsh-arabic-demo
+```
+
+## للمبتدئين
+
+1. ثبّت Git وDocker مع Compose ثم نزّل [النسخة العربية RTL](https://github.com/tegolley/deepseek-harness-rtl-arabic).
+2. افتح نافذة أوامر داخل مجلد النسخة ونفّذ الأوامر السابقة بالترتيب.
+3. انسخ رابط `dsh web:` من السجل وافتحه على الجهاز نفسه. احتفظ برمز الدخول لنفسك.
+4. جرّب نصاً فيه عربية وإنجليزية وأرقام، مثل `Model X سعره 123 ريال والإصدار Pro 2`.
+5. أضف إعداد نموذج داخل الواجهة فقط إذا أردت رداً فعلياً. [الشرح الكامل خطوة بخطوة](docs/arabic-support/INSTALL.ar.md).
+
+## عن هذه النسخة
 
 هذه نسخة مشتقة من [DeepSeek Harness الرسمي](https://github.com/deepseek-ai/deepseek-harness) تضيف عرضاً مناسباً للعربية في واجهة الويب. التعديل محصور في إضافة مستقلة داخل `packages/client/ui-arabic-support`، لتبقى متابعة تحديثات المشروع الأصلي واضحة وقابلة للمراجعة.
 

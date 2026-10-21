@@ -3,7 +3,7 @@ description: "Content-aware Arabic and RTL presentation for the DeepSeek Harness
 kind: "package-reference"
 ---
 
-# Arabic support
+# Arabic RTL support
 
 This browser plugin adds direction handling to Arabic and mixed Arabic/Latin content. It covers the composer, user bubbles, assistant Markdown paragraphs and lists, code fences, question cards, and plan review. It also restores literal Arabic price prose when the Markdown math parser pairs two currency signs into a KaTeX span.
 

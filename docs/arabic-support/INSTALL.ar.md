@@ -1,4 +1,22 @@
-# تثبيت نسخة DeepSeek Harness الداعمة للعربية
+<p lang="en" dir="ltr">For English installation instructions, <a href="INSTALL.en.md">click here</a>.</p>
+
+# تثبيت نسخة DeepSeek Harness RTL الداعمة للعربية
+
+## للمحترفين: الأوامر المختصرة
+
+بعد تثبيت Git وDocker مع Compose:
+
+```bash
+git clone https://github.com/tegolley/deepseek-harness-rtl-arabic.git
+cd deepseek-harness-rtl-arabic
+bash docker/build-arabic-demo.sh
+docker compose -f compose.arabic-demo.yml up -d
+docker compose -f compose.arabic-demo.yml logs --tail=30 dsh-arabic-demo
+```
+
+افتح رابط `dsh web:` الظاهر في السجل على جهاز Docker. [انتقل إلى خطوات التثبيت من المصدر](#التثبيت-من-المصدر) إذا أردت تشغيلها دون حاوية.
+
+## للمبتدئين: شرح كل خطوة
 
 ## 1. المتطلبات
 
