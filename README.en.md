@@ -34,13 +34,7 @@ The fork sets the base direction of each Arabic content block to RTL and isolate
 
 ## Before and after screenshots
 
-These are the same local visual fixture in the official UI and this fork. The sample reply was seeded locally; no model was called and no API key was used. The initial model setup screen is unchanged by chat-direction support.
-
-### Before model setup
-
-| Official upstream | Arabic RTL fork |
-| --- | --- |
-| ![Official startup screen](docs/arabic-support/screenshots/before-start.png) | ![Fork startup screen](docs/arabic-support/screenshots/after-start.png) |
+These are the same local visual fixture in the official UI and this fork. The sample reply was seeded locally; no model was called and no API key was used.
 
 ### Conversation after opening the UI
 
