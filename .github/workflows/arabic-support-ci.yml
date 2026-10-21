@@ -29,6 +29,8 @@ jobs:
         run: corepack enable
       - name: Install
         run: corepack pnpm install --frozen-lockfile
+      - name: Prepare file sandbox for Web replay tests
+        run: bash scripts/prepare-ci-bubblewrap.sh
       - name: Arabic presentation tests
         run: corepack pnpm exec vitest run packages/client/ui-arabic-support/tests
       - name: Arabic-related client tests
