@@ -1,6 +1,6 @@
 <p lang="en" dir="ltr">For the English guide, <a href="README.en.md">click here</a>.</p>
 
-# DeepSeek Harness RTL: دعم العربية
+# دعم العربية RTL في DeepSeek Harness
 
 ## للمحترفين
 

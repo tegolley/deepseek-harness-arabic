@@ -2,7 +2,7 @@
 
 <div lang="ar" dir="rtl" align="right">
 
-<h1>DeepSeek Harness RTL | دعم العربية</h1>
+<h1 dir="rtl">دعم العربية RTL في DeepSeek Harness</h1>
 
 <p>نسخة مجتمعية مشتقة من <a href="https://github.com/deepseek-ai/deepseek-harness">المشروع الرسمي</a> تضيف اتجاه كتابة RTL للعربية داخل واجهة المحادثة. يشمل ذلك مربع الكتابة، ورسائل المستخدم والردود، والقوائم والأرقام المختلطة بكلمات إنجليزية. يظل النص الإنجليزي وحده باتجاه LTR.</p>
 
